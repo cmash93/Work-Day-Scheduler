@@ -5,25 +5,32 @@ $(document).ready(function() {
     $('.saved').hide()
 
     timeInterval = setInterval(() => {
+        $('#currentDay').text(moment().format('dddd, MMMM Do, h:mm:ss a')); 
+        hour = parseInt(moment().format('H'));
 
-        $('#currentDay').text(moment().format('dddd, MMMM Do, h:mm:ss a'));
 
-        $('*[data-store]').each(() => {
-            currentTime = moment();
-            hour = moment().hour($(this).attr('data-store'))
-
-            if (hour < currentTime) {
-                $(this).next().addClass('past')
+        if (hour < 9){
+            $('.description').removeClass("present past").addClass("future");
+        }
+        if (hour > 16){
+            $('.description').removeClass("present future").addClass("past");
+        }
+        $( ".description" ).each(function() {
+            var timeblockNum = parseInt($(this).data('store'));
+            
+            if (hour < timeblockNum){
+                $( this ).removeClass("past present").addClass("future");
             }
-            else if (hour.hour() === currentTime.hour()) {
-                $(this).next().addClass('present')
+            if (hour == timeblockNum){
+                $( this ).removeClass("past future").addClass("present");
             }
-            else if (hour > currentTime) {
-                $(this).next().addClass("future");
+            if (hour > timeblockNum){
+                $( this ).removeClass("present future").addClass("past");
             }
-        });
+        })
 
-    })
+    }, 100)
+
 
     $('*[data-store]').each(function() {
         $(this).val(localStorage.getItem('item-' + $(this).attr('data-store')))
