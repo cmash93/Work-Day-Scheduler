@@ -43,9 +43,9 @@ body {
     
   }
   
-  .description{
+  .description {
     white-space: pre-wrap;
-    background-color: rgb(207, 207, 207);
+    background-color: #d3d3d3;
   }
   
   .past {
@@ -69,6 +69,10 @@ body {
     border-bottom-right-radius: 15px;
     background-color: #06AED5;
     color: white;
+  }
+
+  .saved {
+    display: none;
   }
   
   .saveBtn i:hover {

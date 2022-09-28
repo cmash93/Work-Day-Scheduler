@@ -1,17 +1,53 @@
-// Function to get current time
-// Function to determine if time is in the past, present, future and add classes to color code it 
-// Function to save once save button is pressed.
-// Function actually save item to local storage. 
+$(document).ready(function() {
 
-let currentDay = document.querySelector('#currentDay');
-let timeBlock = document.querySelector('.time-block');
-let description = document.querySelector('.description');
-let saveBtn = document.querySelector('#saveBtn');
+    var hour;
+    var timeInterval;
+    $('.saved').hide()
 
-saveInput
+    timeInterval = setInterval(() => {
 
-saveBtn.addEventListener('click', function() {
+        $('#currentDay').text(moment().format('dddd, MMMM Do, h:mm:ss a'));
 
-})
+        $('*[data-store]').each(() => {
+            currentTime = moment();
+            hour = moment().hour($(this).attr('data-store'))
+
+            if (hour < currentTime) {
+                $(this).next().addClass('past')
+            }
+            else if (hour.hour() === currentTime.hour()) {
+                $(this).next().addClass('present')
+            }
+            else if (hour > currentTime) {
+                $(this).next().addClass("future");
+            }
+        });
+
+    })
+
+    $('*[data-store]').each(function() {
+        $(this).val(localStorage.getItem('item-' + $(this).attr('data-store')))
+    });
+
+    $('.saveBtn').on('click', function() {
+        localStorage.setItem('item-' + $(this).val(), $('*[data-store]').val())
+
+        var saved = document.createElement('p');
+        saved.setAttribute('class', 'saved')
+        saved.textContent = 'Saved!'
+        $('.saved').fadeIn(1000)
+        $('.saved').fadeOut(2000)
+        saved.style.position = 'absolute';
+        saved.style.marginLeft = '42rem';
+        saved.style.marginTop = '5rem';
+
+        $('header').append(saved)
+        
+    });
+
+
+
+
+});
 
 
