@@ -33,11 +33,16 @@ $(document).ready(function() {
 
 
     $('*[data-store]').each(function() {
-        $(this).val(localStorage.getItem('item-' + $(this).attr('data-store')))
+        $(this).val(localStorage.getItem($(this).attr('data-store')))
     });
 
     $('.saveBtn').on('click', function() {
-        localStorage.setItem('item-' + $(this).val(), $('*[data-store]').val())
+        var text = $(this).siblings('.description').val()
+        var time =$(this).prev().attr('data-store');
+
+
+
+        localStorage.setItem(time, text)
 
         var saved = document.createElement('p');
         saved.setAttribute('class', 'saved')
@@ -45,16 +50,12 @@ $(document).ready(function() {
         $('.saved').fadeIn(1000)
         $('.saved').fadeOut(2000)
         saved.style.position = 'absolute';
-        saved.style.marginLeft = '42rem';
-        saved.style.marginTop = '5rem';
+        saved.style.marginTop = '6rem';
+        saved.style.color = '#000000'
 
         $('header').append(saved)
         
     });
-
-
-
-
 });
 
 
