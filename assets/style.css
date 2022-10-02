@@ -2,6 +2,8 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     line-height: 1;
+    background: url(./images/pretty-background.jpg);
+    background-attachment: fixed;
   }
   
   
@@ -21,9 +23,9 @@ body {
   .navbar {
     display: flex;
     justify-content: center;
-    background-color: #004352;
-    color: rgb(255, 255, 255);
-    box-shadow: 0px 1px 3px #27273a;
+    background: url(./images/pretty-background.jpg);
+    color: #004352;
+    /* box-shadow: 0px 1px 3px #27273a; */
   }
 
   .container {
